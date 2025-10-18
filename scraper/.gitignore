@@ -74,3 +74,5 @@ GitHub.sublime-settings
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
+
+article_scraper/scraper/datetime_parser_old.py

@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from django.http import JsonResponse
-from .scraper import scrape_title, scrape_article_content, get_html, scrape_publish_time
+from .scraper import scrape_title, scrape_article_content, scrape_publish_time
+from .parsers import normalize_iso_date, extract_domain
 
 
 # Create your views here.
@@ -14,21 +15,18 @@ def home(request):
     # url = "https://take-group.github.io/example-blog-without-ssr/co-mozna-zrobic-ze-schabu-oprocz-kotletow-5-zaskakujacych-przepisow"
     url = "https://galicjaexpress.pl/ford-c-max-jaki-silnik-benzynowy-wybrac-aby-zaoszczedzic-na-paliwie"
     try:
-        # title = scrape_title(url, headers).get_text(strip=True)
-        # return JsonResponse({"title": title}, json_dumps_params={"ensure_ascii": False})
-        # article_content_html = str(scrape_article_content(url))
-        article_content = scrape_article_content(url).get_text(
-            separator="\n", strip=True
-        )
+        title = scrape_title(url, headers).get_text(strip=True)
+        article_content = scrape_article_content(url).get_text()
+        published_time = normalize_iso_date(scrape_publish_time(url, headers))
+        domain = extract_domain(url)
         return JsonResponse(
-            {"article-content": article_content},
+            {
+                "title": title,
+                "published_at": published_time,
+                "domain": domain,
+                "article-content": article_content,
+            },
             json_dumps_params={"ensure_ascii": False},
         )
-        # published_time = scrape_publish_time(url, headers).get("content")
-        # get_html(url)
-        # return JsonResponse(
-        #     {"published_at": published_time},
-        #     json_dumps_params={"ensure_ascii": False},
-        # )
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
