@@ -1,5 +1,5 @@
 """
-WSGI config for article_scrapper project.
+WSGI config for article_scraper project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'article_scrapper.settings')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "article_scraper.settings")
 
 application = get_wsgi_application()
