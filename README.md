@@ -43,15 +43,6 @@ add desired article urls to ARTICLE_URLS
 python .\manage.py scrape_articles
 ```
 
-### Using scraper command:
-
-in \management\commands\scrape_articles.py
-add desired article urls to ARTICLE_URLS
-
-```
-python .\manage.py scrape_articles
-```
-
 ### Available API endpoints:
 
 **/articles** - list all articles in DB
