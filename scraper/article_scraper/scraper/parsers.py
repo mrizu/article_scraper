@@ -8,7 +8,6 @@ def normalize_iso_date(date_str: str, tz_name: str = "Europe/Warsaw") -> str:
     warsaw_tz = pytz.timezone(tz_name)
     dt_local = dt.astimezone(warsaw_tz)
 
-    # return dt_local.strftime("%d.%m.%Y %H:%M:%S")
     return dt_local
 
 

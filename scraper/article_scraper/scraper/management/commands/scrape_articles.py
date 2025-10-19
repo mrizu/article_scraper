@@ -19,9 +19,7 @@ class Command(BaseCommand):
             self.stdout.write(f"Scraping article {i}/{total}: {url}")
             article = scrape_article(url)
             if article:
-                self.stdout.write(
-                    self.style.SUCCESS(f"Article {i} saved successfully.")
-                )
+                self.stdout.write(self.style.SUCCESS(f"Article saved successfully."))
             else:
                 self.stdout.write(
                     self.style.WARNING(f"Skipped (url already exists): {url}")
